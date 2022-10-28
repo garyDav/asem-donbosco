@@ -9,6 +9,10 @@ export const JournalEntries = () => {
       {/*entries.map(value => (
         <JournalEntry key={value} />
       ))*/}
+      <div className='journal__entry-picture center'>
+        <img src='logo-white.png' alt='Logo' />
+      </div>
+
       <JournalEntry />
     </div>
   )
