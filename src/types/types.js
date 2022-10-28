@@ -7,4 +7,11 @@ export const types = {
 
   uiStartLoading: '[UI] Start loading',
   uiFinishLoading: '[UI] Finish loading',
+
+  authCheckingFinish: '[auth] Finish checking login state',
+  authStartLogin: '[auth] Start login',
+  authLogin: '[auth] Login',
+  authStartRegister: '[auth] Start Register',
+  authStartStartTokenRenew: '[auth] Start token renew',
+  authLogout: '[auth] Logout',
 }
