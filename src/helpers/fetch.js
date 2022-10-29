@@ -30,10 +30,10 @@ const fetchConToken = (endpoint, data, method = 'GET') => {
   } else {
     return fetch(url, {
       method,
-      headers: {
-        //'Content-type': 'application/json',
+      /*headers: {
+        'Content-type': 'application/json',
         Authorization: `Bearer ${token}`,
-      },
+      },*/
       body: JSON.stringify(data),
     })
   }
