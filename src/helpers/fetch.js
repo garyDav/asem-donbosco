@@ -31,7 +31,7 @@ const fetchConToken = (endpoint, data, method = 'GET') => {
     return fetch(url, {
       method,
       headers: {
-        'Content-type': 'application/json',
+        //'Content-type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),

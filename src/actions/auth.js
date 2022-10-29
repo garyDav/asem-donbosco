@@ -1,6 +1,5 @@
 import Swal from 'sweetalert2'
 
-import { firebase } from '../firebase/firebase-config'
 import { fetchSinToken, fetchConToken } from '../helpers/fetch'
 
 import { types } from '../types/types'

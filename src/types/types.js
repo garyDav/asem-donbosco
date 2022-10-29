@@ -14,4 +14,11 @@ export const types = {
   authStartRegister: '[auth] Start Register',
   authStartStartTokenRenew: '[auth] Start token renew',
   authLogout: '[auth] Logout',
+
+  notesAddNew: '[Notes] New note',
+  notesLoad: '[Notes] Load notes',
+  notesUpdated: '[Notes] Updated note',
+  notesFileUrl: '[Notes] Updated image url',
+  notesDelete: '[Notes] Delete note',
+  notesLogoutCleaning: '[Notes] Logout Cleaning',
 }

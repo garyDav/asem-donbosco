@@ -1,6 +1,15 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { startSaveNote, startUploading } from '../../actions/notes'
 
 export const NotesAppBar = () => {
+  const dispatch = useDispatch()
+  const { active } = useSelector(state => state.notes)
+
+  const handleSave = () => {
+    dispatch(startSaveNote(active))
+  }
+
   const handlePictureClick = () => {
     document.querySelector('#fileSelector').click()
   }
@@ -9,13 +18,13 @@ export const NotesAppBar = () => {
     const files = e.target.files
 
     if (files.length > 0) {
-      dispatch()
+      dispatch(startUploading(files))
     }
   }
 
   return (
     <div className='notes__appbar'>
-      <span>28 de agosto 2020</span>
+      <span>2022</span>
 
       <input
         id='fileSelector'
@@ -31,7 +40,9 @@ export const NotesAppBar = () => {
           Imagenes Pregunta
         </button>
 
-        <button className='btn'>Save</button>
+        <button className='btn' onClick={handleSave}>
+          Guardar
+        </button>
       </div>
     </div>
   )

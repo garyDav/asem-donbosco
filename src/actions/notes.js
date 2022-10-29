@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 import { db } from '../firebase/firebase-config'
 import { types } from '../types/types'
 import { loadNotes } from '../helpers/loadNotes'
-import { fileUpload } from '../helpers/fileUpload'
+import { fetchConToken } from '../helpers/fetch'
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
@@ -21,14 +21,6 @@ export const startNewNote = () => {
     dispatch(addNewNote(doc.id, newNote))
   }
 }
-
-export const activeNote = (id, note) => ({
-  type: types.notesActive,
-  payload: {
-    id,
-    ...note,
-  },
-})
 
 export const addNewNote = (id, note) => ({
   type: types.notesAddNew,
@@ -79,9 +71,9 @@ export const refreshNote = (id, note) => ({
   },
 })
 
-export const startUploading = file => {
+export const startUploading = files => {
   return async (dispatch, getState) => {
-    const { active: activeNote } = getState().notes
+    //const { active: activeNote } = getState().notes
 
     Swal.fire({
       title: 'Uploading...',
@@ -92,10 +84,20 @@ export const startUploading = file => {
       },
     })
 
-    const fileUrl = await fileUpload(file)
-    activeNote.url = fileUrl
+    const formData = new FormData()
+    formData.append('files', files)
 
-    dispatch(startSaveNote(activeNote))
+    const resp = await fetchConToken('upload', formData, 'POST')
+    const body = await resp.json()
+
+    console.log(body)
+
+    if (!body?.error) {
+      console.log(body.nameFiles)
+      //activeNote.url = body.nameFiles
+
+      //dispatch(startSaveNote(activeNote))
+    }
 
     Swal.close()
   }
