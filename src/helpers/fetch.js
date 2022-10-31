@@ -39,4 +39,36 @@ const fetchConToken = (endpoint, data, method = 'GET') => {
   }
 }
 
-export { fetchSinToken, fetchConToken }
+const fileUploadFormData = async (endpoint, data) => {
+  const url = `${baseUrl}/${endpoint}`
+  const token = localStorage.getItem('token') || ''
+
+  const formData = new FormData()
+  const filesLength = data.length
+  for (let i = 0; i < filesLength; i++) {
+    formData.append('files', data[i])
+  }
+
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    })
+
+    if (resp.ok) {
+      const cloudResp = await resp.json()
+      return cloudResp
+    } else {
+      throw await resp.json()
+    }
+  } catch (err) {
+    throw err
+  }
+
+  // return url de la imagen
+}
+
+export { fetchSinToken, fetchConToken, fileUploadFormData }

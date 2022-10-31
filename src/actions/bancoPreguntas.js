@@ -2,10 +2,9 @@ import Swal from 'sweetalert2'
 
 import { db } from '../firebase/firebase-config'
 import { types } from '../types/types'
-import { loadNotes } from '../helpers/loadNotes'
-import { fetchConToken } from '../helpers/fetch'
+import { fetchConToken, fileUploadFormData } from '../helpers/fetch'
 
-export const startNewNote = () => {
+/*export const startNewNote = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth
 
@@ -22,6 +21,14 @@ export const startNewNote = () => {
   }
 }
 
+export const activeNote = (id, pregunta) => ({
+  type: types.notesActive,
+  payload: {
+    id,
+    ...pregunta,
+  },
+})
+
 export const addNewNote = (id, note) => ({
   type: types.notesAddNew,
   payload: {
@@ -32,19 +39,28 @@ export const addNewNote = (id, note) => ({
 
 export const startLoadingNotes = uid => {
   return async dispatch => {
-    const notes = await loadNotes(uid)
-    dispatch(setNotes(notes))
+
+    const banco_preguntas = await fetchConToken(
+      'banco_preguntas/6360198d8eef20a2f64ec147'
+    )
+    const banco_preguntasSnap = await banco_preguntas.json()
+    const banco_pregunta = banco_preguntasSnap.data
+
+
+    const preguntas = await loadNotes(uid)
+    dispatch(setPreguntas(preguntas))
   }
 }
 
-export const setNotes = notes => ({
+export const setPreguntas = preguntas => ({
   type: types.notesLoad,
-  payload: notes,
-})
+  payload: preguntas,
+})*/
 
-export const startSaveNote = note => {
+export const startSavePregunta = pregunta => {
   return async (dispatch, getState) => {
-    const { uid } = getState().auth
+    console.log(pregunta)
+    /*const { uid } = getState().auth
 
     if (!note.url) {
       delete note.url
@@ -56,11 +72,11 @@ export const startSaveNote = note => {
     await db.doc(`${uid}/journal/notes/${note.id}`).update(noteToFirestore)
 
     dispatch(refreshNote(note.id, noteToFirestore))
-    Swal.fire('Saved', note.title, 'success')
+    Swal.fire('Saved', note.title, 'success')*/
   }
 }
 
-export const refreshNote = (id, note) => ({
+/*export const refreshNote = (id, note) => ({
   type: types.notesUpdated,
   payload: {
     id,
@@ -84,19 +100,13 @@ export const startUploading = files => {
       },
     })
 
-    const formData = new FormData()
-    formData.append('files', files)
+    const resp = await fileUploadFormData('upload', files)
 
-    const resp = await fetchConToken('upload', formData, 'POST')
-    const body = await resp.json()
-
-    console.log(body)
-
-    if (!body?.error) {
-      console.log(body.nameFiles)
+    if (!resp?.error) {
+      console.log(resp.nameFiles)
       //activeNote.url = body.nameFiles
 
-      //dispatch(startSaveNote(activeNote))
+      //dispatch(startSavePregunta(activeNote))
     }
 
     Swal.close()
@@ -120,3 +130,4 @@ export const deleteNote = id => ({
 export const noteLogout = () => ({
   type: types.notesLogoutCleaning,
 })
+*/

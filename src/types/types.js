@@ -15,10 +15,10 @@ export const types = {
   authStartStartTokenRenew: '[auth] Start token renew',
   authLogout: '[auth] Logout',
 
-  notesAddNew: '[Notes] New note',
-  notesLoad: '[Notes] Load notes',
-  notesUpdated: '[Notes] Updated note',
-  notesFileUrl: '[Notes] Updated image url',
-  notesDelete: '[Notes] Delete note',
-  notesLogoutCleaning: '[Notes] Logout Cleaning',
+  bancoPreguntasLoad: '[BancoPreguntas] Load bancoPreguntas',
+  bancoPreguntasAddNew: '[BancoPreguntas] New note',
+  bancoPreguntasUpdated: '[BancoPreguntas] Updated note',
+  bancoPreguntasFileUrl: '[BancoPreguntas] Updated image url',
+  bancoPreguntasDelete: '[BancoPreguntas] Delete note',
+  bancoPreguntasLogoutCleaning: '[BancoPreguntas] Logout Cleaning',
 }
