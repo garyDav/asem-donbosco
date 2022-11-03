@@ -4,19 +4,11 @@ export const JournalEntry = () => {
   return (
     <>
       <div className='journal__entry pointer'>
-        <p>Enlace 1</p>
+        <p>Banco de Preguntas</p>
       </div>
 
       <div className='journal__entry pointer'>
-        <p>Enlace 1</p>
-      </div>
-
-      <div className='journal__entry pointer'>
-        <p>Enlace 1</p>
-      </div>
-
-      <div className='journal__entry pointer'>
-        <p>Enlace 1</p>
+        <p>Calificaciones</p>
       </div>
     </>
   )

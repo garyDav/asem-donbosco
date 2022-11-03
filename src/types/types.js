@@ -17,6 +17,7 @@ export const types = {
 
   bancoPreguntasLoad: '[BancoPreguntas] Load bancoPreguntas',
   bancoPreguntasAddNew: '[BancoPreguntas] New note',
+  bancoPreguntasActive: '[BancoPreguntas] Set active bancoPreguntas',
   bancoPreguntasUpdated: '[BancoPreguntas] Updated note',
   bancoPreguntasFileUrl: '[BancoPreguntas] Updated image url',
   bancoPreguntasDelete: '[BancoPreguntas] Delete note',

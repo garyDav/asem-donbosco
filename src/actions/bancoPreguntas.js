@@ -1,65 +1,68 @@
 import Swal from 'sweetalert2'
 
-import { db } from '../firebase/firebase-config'
 import { types } from '../types/types'
 import { fetchConToken, fileUploadFormData } from '../helpers/fetch'
 
-/*export const startNewNote = () => {
+export const startNewPregunta = () => {
   return async (dispatch, getState) => {
-    const { uid } = getState().auth
+    const data = getState().bancoPreguntas
 
-    const newNote = {
-      title: '',
-      body: '',
-      date: new Date().getTime(),
+    const newPregunta = {
+      pregunta_txt: '',
+      pregunta_img: [],
+      isVisible: true,
+      claves: [],
     }
+    /*{
+      clave: String,
+      isImg: { type: Boolean, default: false },
+    },*/
 
-    const doc = await db.collection(`${uid}/journal/notes`).add(newNote)
+    /*const resp = await fetchConToken('banco_preguntas', newPregunta, 'POST')
+    const body = await resp.json()*/
 
-    dispatch(activeNote(doc.id, newNote))
-    dispatch(addNewNote(doc.id, newNote))
+    dispatch(activeBancoPregunta('123abc', newPregunta))
+    // dispatch(addNewNote(doc.id, newNote))
   }
 }
 
-export const activeNote = (id, pregunta) => ({
-  type: types.notesActive,
+export const activeBancoPregunta = (id, pregunta) => ({
+  type: types.bancoPreguntasActive,
   payload: {
     id,
     ...pregunta,
   },
 })
 
-export const addNewNote = (id, note) => ({
+/*export const addNewNote = (id, note) => ({
   type: types.notesAddNew,
   payload: {
     id,
     ...note,
   },
-})
+})*/
 
-export const startLoadingNotes = uid => {
+export const startLoadingQuestion = id => {
   return async dispatch => {
 
-    const banco_preguntas = await fetchConToken(
-      'banco_preguntas/6360198d8eef20a2f64ec147'
+    const resp = await fetchConToken(
+      `banco_preguntas/user/${id}`
     )
-    const banco_preguntasSnap = await banco_preguntas.json()
-    const banco_pregunta = banco_preguntasSnap.data
+    const body = await resp.json()
 
-
-    const preguntas = await loadNotes(uid)
-    dispatch(setPreguntas(preguntas))
+    if (!body?.error) {
+      dispatch(setBancoPreguntas(body.data))
+    }
   }
 }
 
-export const setPreguntas = preguntas => ({
-  type: types.notesLoad,
-  payload: preguntas,
-})*/
+export const setBancoPreguntas = ( bancoPreguntas ) => ({
+  type: types.bancoPreguntasLoad,
+  payload: bancoPreguntas
+})
 
 export const startSavePregunta = pregunta => {
   return async (dispatch, getState) => {
-    console.log(pregunta)
     /*const { uid } = getState().auth
 
     if (!note.url) {
@@ -86,6 +89,11 @@ export const startSavePregunta = pregunta => {
     },
   },
 })
+
+export const noteLogout = () => ({
+  type: types.notesLogoutCleaning,
+})
+*/
 
 export const startUploading = files => {
   return async (dispatch, getState) => {
@@ -116,18 +124,13 @@ export const startUploading = files => {
 export const startDeleting = id => {
   return async (dispatch, getState) => {
     const uid = getState().auth.uid
-    await db.doc(`${uid}/journal/notes/${id}`).delete()
 
-    dispatch(deleteNote(id))
+    //dispatch(deleteNote(id))
   }
 }
 
-export const deleteNote = id => ({
+/*export const deleteNote = id => ({
   type: types.notesDelete,
   payload: id,
-})
+})*/
 
-export const noteLogout = () => ({
-  type: types.notesLogoutCleaning,
-})
-*/

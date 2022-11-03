@@ -7,10 +7,18 @@ const initialState = {
 
 export const bancoPreguntasReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.bancoPreguntasActive:
+      return {
+        ...state,
+        activePregunta: {
+          ...action.payload
+        }
+      }
+
     case types.bancoPreguntasLoad:
       return {
         ...state,
-        bancoPreguntas: [...action.payload],
+        bancoPreguntas: { ...action.payload }
       }
     /*case types.bancoPreguntasAddNew:
       return {

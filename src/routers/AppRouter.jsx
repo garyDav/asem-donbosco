@@ -11,6 +11,7 @@ import { login, startChecking } from '../actions/auth'
 import { PublicRoute } from './PublicRoute'
 import { LoginScreen } from '../components/auth/LoginScreen'
 import { RegisterScreen } from '../components/auth/RegisterScreen'
+import { startLoadingQuestion } from '../actions/bancoPreguntas'
 
 export const AppRouter = () => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ export const AppRouter = () => {
 
   useEffect(() => {
     dispatch(startChecking())
+    //dispatch(startLoadingQuestion('abc123'))
   }, [dispatch])
 
   if (checking) {

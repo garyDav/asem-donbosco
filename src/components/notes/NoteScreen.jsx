@@ -1,55 +1,61 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { NotesAppBar } from './NotesAppBar'
-/*import { useForm } from '../../hooks/useForm'
-import { activeNote, startDeleting } from '../../actions/bancoPreguntas'
-*/
+import { useForm } from '../../hooks/useForm'
+import { activeBancoPregunta, startDeleting } from '../../actions/bancoPreguntas'
+
 export const NoteScreen = () => {
-  /*const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  const { active: pregunta } = useSelector(state => state.preguntas)
-  const [formValues, handleInputChange, reset] = useForm(pregunta)
-  const { pregunta_txt, pregunta_img, claves } = formValues
+  const { activePregunta } = useSelector(state => state.bancoPreguntas)
+  // console.log(data)
+  const [formValues, handleInputChange, reset] = useForm({
+    pregunta_txt: '',
+    pregunta_img: [],
+    isVisible: true,
+    claves: [],
+  })
+  const {
+    pregunta_txt,
+    pregunta_img,
+    isVisible,
+    claves,
+  } = formValues
 
-  const activeId = useRef(pregunta.id)
+  const activeId = useRef(activePregunta?.id)
 
   useEffect(() => {
-    if (pregunta.id !== activeId.current) {
-      reset(pregunta)
-      activeId.current = pregunta.id
+    if (activePregunta?.id !== activeId.current) {
+      reset(activePregunta)
+      activeId.current = activePregunta?.id
     }
-  }, [pregunta, reset])
+  }, [activePregunta, reset])
 
-  useEffect(() => {
-    dispatch(activeNote(formValues.id, { ...formValues }))
-  }, [formValues, dispatch])
+  /*useEffect(() => {
+    dispatch(activePregunta(formValues.id, { ...formValues }))
+  }, [formValues, dispatch])*/
 
-  const handleDelete = () => {
+  /*const handleDelete = () => {
     dispatch(startDeleting(id))
   }*/
 
   return (
-    <div className='notes__main-content'>
-      <NotesAppBar />
+    <div className='notes__content'>
+      {/*<h1 className='notes__title-input'> Banco de Preguntas </h1>*/}
 
-      <div className='notes__content'>
-        <h1 className='notes__title-input'> Banco de Preguntas </h1>
+      <textarea
+        placeholder='Inserte Pregunta'
+        className='notes__textarea'
+        name='pregunta_txt'
+        value={pregunta_txt}
+        onChange={handleInputChange}
+      ></textarea>
 
-        <textarea
-          placeholder='Inserte Pregunta'
-          className='notes__textarea'
-          name='pregunta_txt'
-          //value={pregunta_txt}
-          //onChange={handleInputChange}
-        ></textarea>
-
-        {/*pregunta?.pregunta_img.map(img => (
-          <div className='notes__image'>
-            <img src={img} alt='imagen' />
-          </div>
-        ))*/}
-      </div>
+      {/*pregunta?.pregunta_img.map(img => (
+        <div className='notes__image'>
+          <img src={img} alt='imagen' />
+        </div>
+      ))*/}
     </div>
   )
 }

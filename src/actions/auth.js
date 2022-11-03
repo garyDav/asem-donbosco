@@ -4,6 +4,7 @@ import { fetchSinToken, fetchConToken } from '../helpers/fetch'
 
 import { types } from '../types/types'
 import { startLoading, finishLoading } from './ui'
+import { startLoadingQuestion } from './bancoPreguntas'
 
 export const startLoginEmailPassword = (email, password) => {
   return async dispatch => {
@@ -15,35 +16,14 @@ export const startLoginEmailPassword = (email, password) => {
       localStorage.setItem('token', body.token)
       localStorage.setItem('token-init-date', new Date().getTime())
 
+      dispatch(startLoadingQuestion(body.data._id))
       dispatch(login(body.data))
       dispatch(finishLoading())
     } else {
       dispatch(finishLoading())
-      Swal.fire(
-        'Error',
-        `${`${body.message} ${body?.stack}`} ${body?.stack}`,
-        'error'
-      )
+      Swal.fire( 'Error', `${body.message} ${body.stack}`, 'error' )
     }
   }
-
-  // return dispatch => {
-  //   dispatch(startLoading())
-
-  //   firebase
-  //     .auth()
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then(({ user }) => {
-  //       dispatch(login(user.uid, user.displayName))
-
-  //       dispatch(finishLoading())
-  //     })
-  //     .catch(e => {
-  //       console.log(e)
-  //       dispatch(finishLoading())
-  //       Swal.fire('Error', e.message, 'error')
-  //     })
-  // }
 }
 
 export const startRegisterWithEmailPasswordName = user => {
@@ -56,28 +36,14 @@ export const startRegisterWithEmailPasswordName = user => {
       localStorage.setItem('token', body.token)
       localStorage.setItem('token-init-date', new Date().getTime())
 
+      dispatch(startLoadingQuestion(body.data._id))
       dispatch(login(body.data))
       dispatch(finishLoading())
     } else {
       dispatch(finishLoading())
-      Swal.fire('Error', `${body.message} ${body?.stack}`, 'error')
+      Swal.fire('Error', `${body.message} ${body.stack}`, 'error')
     }
   }
-
-  // return dispatch => {
-  //   firebase
-  //     .auth()
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then(async ({ user }) => {
-  //       await user.updateProfile({ displayName: name })
-
-  //       dispatch(login(user.uid, user.displayName))
-  //     })
-  //     .catch(e => {
-  //       console.log(e)
-  //       Swal.fire('Error', e.message, 'error')
-  //     })
-  // }
 }
 
 export const startChecking = () => {
@@ -90,6 +56,7 @@ export const startChecking = () => {
       localStorage.setItem('token', body.token)
       localStorage.setItem('token-init-date', new Date().getTime())
 
+      dispatch(startLoadingQuestion(body.data._id))
       dispatch(login(body.data))
       dispatch(finishLoading())
     } else {
