@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 import { types } from '../types/types'
 import { fetchConToken, fileUploadFormData } from '../helpers/fetch'
 
-export const startNewPregunta = () => {
+/*export const startNewPregunta = () => {
   return async (dispatch, getState) => {
     const data = getState().bancoPreguntas
 
@@ -13,23 +13,24 @@ export const startNewPregunta = () => {
       isVisible: true,
       claves: [],
     }
-    /*{
-      clave: String,
-      isImg: { type: Boolean, default: false },
-    },*/
 
-    /*const resp = await fetchConToken('banco_preguntas', newPregunta, 'POST')
-    const body = await resp.json()*/
+    console.log(data, newPregunta)
+    // {
+    //   clave: String,
+    //   isImg: { type: Boolean, default: false },
+    // },
 
-    dispatch(activeBancoPregunta('123abc', newPregunta))
+    const resp = await fetchConToken('banco_preguntas', newPregunta, 'POST')
+    const body = await resp.json()
+
+    // dispatch(activeBancoPregunta('123abc', newPregunta))
     // dispatch(addNewNote(doc.id, newNote))
   }
-}
+}*/
 
-export const activeBancoPregunta = (id, pregunta) => ({
+export const activeBancoPregunta = pregunta => ({
   type: types.bancoPreguntasActive,
   payload: {
-    id,
     ...pregunta,
   },
 })
@@ -44,10 +45,7 @@ export const activeBancoPregunta = (id, pregunta) => ({
 
 export const startLoadingQuestion = id => {
   return async dispatch => {
-
-    const resp = await fetchConToken(
-      `banco_preguntas/user/${id}`
-    )
+    const resp = await fetchConToken(`banco_preguntas/user/${id}`)
     const body = await resp.json()
 
     if (!body?.error) {
@@ -56,13 +54,25 @@ export const startLoadingQuestion = id => {
   }
 }
 
-export const setBancoPreguntas = ( bancoPreguntas ) => ({
+export const setBancoPreguntas = bancoPreguntas => ({
   type: types.bancoPreguntasLoad,
-  payload: bancoPreguntas
+  payload: bancoPreguntas,
 })
 
 export const startSavePregunta = pregunta => {
   return async (dispatch, getState) => {
+    const { bancoPreguntas } = getState().bancoPreguntas
+
+    const resp = await fetchConToken(
+      `banco_preguntas/${bancoPreguntas._id}`,
+      pregunta,
+      'PUT'
+    )
+    const body = await resp.json()
+
+    console.log(body)
+
+    //dispatch(activeBancoPregunta(newPregunta))
     /*const { uid } = getState().auth
 
     if (!note.url) {
@@ -133,4 +143,3 @@ export const startDeleting = id => {
   type: types.notesDelete,
   payload: id,
 })*/
-

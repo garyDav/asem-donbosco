@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { startNewPregunta, startUploading } from '../../actions/bancoPreguntas'
+import { startSavePregunta, startUploading } from '../../actions/bancoPreguntas'
 
 export const NotesAppBar = () => {
   const dispatch = useDispatch()
@@ -15,7 +15,8 @@ export const NotesAppBar = () => {
   }
 
   const handleSave = () => {
-    dispatch(startNewPregunta(activePregunta))
+    if (!!activePregunta.pregunta_txt)
+      dispatch(startSavePregunta(activePregunta))
   }
 
   const handlePictureClick = () => {

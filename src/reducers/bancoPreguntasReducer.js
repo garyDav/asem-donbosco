@@ -1,8 +1,23 @@
 import { types } from '../types/types'
 
+/**
+ * {
+    pregunta_txt: '',
+    pregunta_img: [],
+    isVisible: true,
+    claves: [],
+  }
+ */
+
 const initialState = {
   bancoPreguntas: {},
-  activePregunta: null,
+  preguntas: [],
+  activePregunta: {
+    pregunta_txt: '',
+    pregunta_img: [],
+    isVisible: true,
+    claves: [],
+  },
 }
 
 export const bancoPreguntasReducer = (state = initialState, action) => {
@@ -11,23 +26,24 @@ export const bancoPreguntasReducer = (state = initialState, action) => {
       return {
         ...state,
         activePregunta: {
-          ...action.payload
-        }
+          ...action.payload,
+        },
       }
 
     case types.bancoPreguntasLoad:
       return {
         ...state,
-        bancoPreguntas: { ...action.payload }
+        bancoPreguntas: { ...action.payload },
+        preguntas: [...action.payload.preguntas],
       }
-    /*case types.bancoPreguntasAddNew:
+
+    case types.bancoPreguntasAddNew:
       return {
         ...state,
-        bancoPreguntas: [action.payload, ...state.preguntas],
+        preguntas: [action.payload, ...state.preguntas],
       }
 
-
-    case types.bancoPreguntasUpdated:
+    /*case types.bancoPreguntasUpdated:
       return {
         ...state,
         bancoPreguntas: state.preguntas.map(pregunta =>

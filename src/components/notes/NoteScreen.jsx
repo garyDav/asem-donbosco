@@ -2,38 +2,25 @@ import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { useForm } from '../../hooks/useForm'
-import { activeBancoPregunta, startDeleting } from '../../actions/bancoPreguntas'
+import {
+  activeBancoPregunta,
+  startDeleting,
+} from '../../actions/bancoPreguntas'
 
 export const NoteScreen = () => {
   const dispatch = useDispatch()
 
   const { activePregunta } = useSelector(state => state.bancoPreguntas)
-  // console.log(data)
-  const [formValues, handleInputChange, reset] = useForm({
-    pregunta_txt: '',
-    pregunta_img: [],
-    isVisible: true,
-    claves: [],
-  })
-  const {
-    pregunta_txt,
-    pregunta_img,
-    isVisible,
-    claves,
-  } = formValues
-
-  const activeId = useRef(activePregunta?.id)
-
-  useEffect(() => {
-    if (activePregunta?.id !== activeId.current) {
-      reset(activePregunta)
-      activeId.current = activePregunta?.id
-    }
-  }, [activePregunta, reset])
+  const [formValues, handleInputChange, reset] = useForm(activePregunta)
+  const { pregunta_txt, pregunta_img, isVisible, claves } = formValues
 
   /*useEffect(() => {
-    dispatch(activePregunta(formValues.id, { ...formValues }))
-  }, [formValues, dispatch])*/
+    console.log(pregunta_txt)
+  }, [activePregunta, reset])*/
+
+  useEffect(() => {
+    dispatch(activeBancoPregunta({ ...formValues }))
+  }, [formValues, dispatch])
 
   /*const handleDelete = () => {
     dispatch(startDeleting(id))
@@ -48,8 +35,7 @@ export const NoteScreen = () => {
         className='notes__textarea'
         name='pregunta_txt'
         value={pregunta_txt}
-        onChange={handleInputChange}
-      ></textarea>
+        onChange={handleInputChange}></textarea>
 
       {/*pregunta?.pregunta_img.map(img => (
         <div className='notes__image'>
