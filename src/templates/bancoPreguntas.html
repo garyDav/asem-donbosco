@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banco Preguntas</title>
+</head>
+<style>
+  * {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0px;
+  }
+  body {
+    margin: 0;
+  }
+
+  .questions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-gap: 20px;
+  }
+
+  .questions__insert, .questions__insert-textarea {
+    border: none;
+  }
+  .questions__insert, .questions__insert-textarea:focus{
+    outline: none;
+  }
+  .questions__insert {
+    color: #363636;
+    font-size: 25px;
+    font-weight: 700;
+  }
+  .questions__insert-textarea {
+    border-bottom: 1px solid #363636;
+    color: #363636;
+    font-size: 20px;
+    resize: none;
+    height: 100px;
+  }
+
+  .questions__images {
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+  }
+  .questions__images-item > img {
+    vertical-align: middle;
+  }
+
+</style>
+<body>
+  <main class="questions">
+    <div class="questions__insert">
+      <textarea class="questions__insert-textarea"></textarea>
+    </div>
+    <div class="questions__images">
+      <figure class="questions__images-item">
+        <img src="https://picsum.photos/150/100" alt="img pregunta">
+      </figure>
+      <div class="questions__images-item">
+        <button>+</button>
+      </div>
+    </div>
+    <div class="questions__answers">
+      <div class="questions__answers-item">
+        <input type="checkbox" name="" id="">
+        <button>txt</button>
+        <button>img</button>
+      </div>
+      <div class="questions__answers-item">
+        <button>+</button>
+      </div>
+    </div>
+    <div class="questions__content">
+      <div class="questions__content-list">
+        <p>Pregunta 1</p>
+      </div>
+      <div class="questions__content-list">
+        <p>Pregunta 1</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
